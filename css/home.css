@@ -1,0 +1,13 @@
+/** header */
+header {
+    background: linear-gradient(135deg, #cc0000,#3b0000);
+}
+
+.navbar {
+    box-shadow: 1px 3px 3px gray;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+}
