@@ -1,0 +1,38 @@
+/** 設定CSS */ 
+
+a {
+    text-decoration: none;
+}
+
+label {
+    font-weight: bold;
+}
+
+dt {
+    float: left;
+    clear: left;
+    margin-right: 0.5em;
+    width: 120px;
+}
+
+.field {
+    margin-bottom: 30px;
+}
+
+.card-main {
+    margin-bottom: 10px;
+    border: none;
+}
+
+.card-body-main {
+    border: 1px solid rgba(0,0,0,.125);
+}
+
+.card-body-sub {
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0 0 .25rem .25rem;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}

@@ -1,0 +1,54 @@
+/** ダッシュボードCSS */
+
+a:link, a:visited, a:hover, a:active {
+    text-decoration: none;
+    color: black;
+}
+
+/** container */
+
+/* カード */
+.col-md {
+    margin: 0 1rem;
+    margin-bottom: 15px;
+}
+.card {
+    box-shadow: 3px 3px 3px gray;
+}
+.h-100 {
+    height: 100%!important;
+}
+
+/* メニュー */
+.menu-field {
+    margin: 0px auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* 目標 */
+.goals-field {
+    margin-bottom: 30px;
+}
+
+
+/* カレンダー */
+table {
+    width: 100%;
+}
+table th {
+    background: #EEEEEE;
+}
+table th,
+table td {
+    border: 1px solid #CCCCCC;
+    text-align: center;
+    padding: 5px;
+}
+.today {
+    background-color: palegreen;
+}
+
+
+
+/*http://raining.bear-life.com/php/php%E3%81%A7%E7%B0%A1%E5%8D%98%E3%81%AA%E3%82%AB%E3%83%AC%E3%83%B3%E3%83%80%E3%83%BC%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95*/

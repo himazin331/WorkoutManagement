@@ -1,0 +1,59 @@
+/** 共通CSS */
+
+body {
+    display: flex;
+    flex-flow: column;
+    min-height: 100vh;
+}
+
+img {
+    color: white;
+}
+
+/** header */
+header {
+    box-shadow: 1px 3px 3px gray;
+    margin-bottom: 50px;
+}
+
+/* ナビゲーション */
+.navbar {
+    margin-left: 10px;
+}
+.navbar-nav {
+    width: auto;
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+}
+.nav-item-nest-content {
+    color: rgba(255,255,255,.55);
+    pointer-events: auto;
+}
+.nav-item-nest-content:hover {
+    color: rgba(255,255,255,.75);
+}
+.nav-item-nest {
+    text-indent: 1em;
+    pointer-events: auto;
+}
+.account-info-link {
+    text-decoration: none;
+}
+.account-info {
+    margin-right: 5px;
+}
+.account-info-img {
+    opacity: 0.55;
+}
+
+/** container */
+.wrapper {
+    flex: 1;
+}
+
+/** footer */
+footer {
+    padding: 20px 0;
+    text-align: center;
+}
