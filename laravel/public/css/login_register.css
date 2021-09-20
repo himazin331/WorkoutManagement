@@ -18,6 +18,10 @@ a:link, a:visited, a:hover, a:active {
     margin-bottom: 10px;
 }
 
-.btn:focus{
+.required {
+    color: red;
+}
+
+.btn-link:focus{
     box-shadow: none !important;
 }

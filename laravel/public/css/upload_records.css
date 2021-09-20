@@ -1,0 +1,134 @@
+/** '記録をつける'ページCSS */
+
+/** header */
+.white, .white:hover {
+    color: white !important;
+}
+
+/** container */
+/* エラーメッセージ */
+.invalid-feedback {
+    display: inline;
+}
+
+/* 記録日 */
+.record-date-field {
+    margin-bottom: 15px;
+    border: none;
+}
+.record-date-field .card-header {
+    padding: 16px 20px;
+    height: 54px;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 4px 4px 0 0px;
+}
+.record-date-field .card-body {
+    border-left: 1px solid rgba(0,0,0,.125);
+    border-right: 1px solid rgba(0,0,0,.125);
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    border-radius: 0 0 4px 4px;
+}
+.input-date-field {
+    padding: 0 22px;
+}
+
+/* アコーディオン */
+.accordion, .accordion-header {
+    border-radius: 10px;
+}
+.accordion-button:focus {
+    border: 1px solid rgba(0,0,0,.125) !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+.accordion-button::after {
+    filter: grayscale(100%) invert(100%);
+}
+
+/* 記録 */
+.item-name-header {
+    margin-bottom: 5px;
+}
+.add-btn {
+    width: 100%;
+    height: 38px;
+    padding: 7px;
+    border: 1px solid #ced4da !important;
+}
+.add-btn:focus {
+    border-color: #565e64 !important;
+    box-shadow: 0 0 0 0.25rem rgb(130 138 145 / 50%) !important;
+}
+.add-btn img{
+    vertical-align: baseline;
+    opacity: 0.5;
+}
+
+/* トレーニングメニュー記録 */ 
+.ifnot-item-name-header {
+    margin-bottom: 15px;
+}
+.tm-preset-field, .item-field, .bodyinfo .form-group {
+    margin-bottom: 10px;
+}
+.tm-add-preset-label {
+    margin-right: 12px;
+}
+.input-tm-preset-name {
+    width: 120px;
+    display: inline;
+}
+
+/* 摂取カロリー記録 */
+.cal-input {
+    text-align: right;
+}
+.cal-input::placeholder {
+    text-align: right;
+}
+
+/* 画像記録 */
+.upload-file-field {
+    border: 1px solid #ced4da !important;
+}
+.upload-file-field .card-body {
+    padding: 0;
+}
+.input-file-field {
+    width: 100%;
+    height: 150px;
+}
+.input-file-field input {
+    display: none;
+}
+.custom-file {
+    text-align: center;
+}
+.custom-file-label {
+    opacity: 0.5;
+    font-size: 24px;
+    padding: 39.5px 0;
+}
+.overlay {
+    background-color: #a8a9aa !important;
+}
+.inputfile-reset-btn {
+    width: 100%;
+    margin-top: 10px;
+    border: 1px solid #ced4da;
+}
+.inputfile-reset-btn:focus {
+    border-color: #565e64 !important;
+    box-shadow: 0 0 0 0.25rem rgb(130 138 145 / 50%) !important;
+}
+
+/* OKボタン */
+.form-submit {
+    margin: 30px auto;
+}
+.big-btn {
+    width: 100%;
+}
+.submit-btn {
+    display:none;
+}

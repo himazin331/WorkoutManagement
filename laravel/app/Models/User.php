@@ -1,5 +1,5 @@
 <?php
-//* Authモデル */
+//* ユーザ認証モジュール */
 
 namespace App\Models;
 
@@ -13,34 +13,25 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var string[]
-     */
+    // 操作許可カラム
     protected $fillable = [
         'name',
         'gender',
         'birthday',
+        'age',
+        'stature',
+        'weight',
         'email',
         'password',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array
-     */
+    // データ取得しないカラム
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array
-     */
+    // 型変換するカラム
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];

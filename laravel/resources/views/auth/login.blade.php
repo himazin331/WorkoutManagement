@@ -22,10 +22,10 @@
                     @csrf
                     <!-- ユーザID -->
                     <div class="form-group row">
-                        <label for="name" class="col-md-4 col-form-label text-md-right">ユーザID</label>
+                        <label class="col-md-4 col-form-label text-md-right" for="name">ユーザID</label>
                         <div class="col-md-6">
-                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-                            <!-- 不正なユーザID入力時の処理 -->
+                            <input class="form-control @error('name') is-invalid @enderror" id="name" type="text" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                            <!-- エラーメッセージ -->
                             @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -35,10 +35,10 @@
                     </div>
                     <!-- パスワード -->
                     <div class="form-group row">
-                        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('パスワード') }}</label>
+                        <label class="col-md-4 col-form-label text-md-right" for="password">{{ __('パスワード') }}</label>
                         <div class="col-md-6">
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-                            <!-- 不正なパスワード入力時の処理 -->
+                            <input class="form-control @error('password') is-invalid @enderror" id="password" type="password" name="password" required autocomplete="current-password">
+                            <!-- エラーメッセージ -->
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -50,7 +50,7 @@
                     <div class="form-group row">
                         <div class="col-md-6 offset-md-4">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                <input class="form-check-input {{ old('remember') ? 'checked' : '' }}" id="remember" type="checkbox" name="remember">
                                 <label class="form-check-label" for="remember">
                                     {{ __('Remember Me') }}
                                 </label>
@@ -61,7 +61,7 @@
                     <div class="form-group row mb-0">
                         <div class="col-md-6 offset-md-4">
                             <!-- ログインsubmit -->
-                            <button type="submit" class="btn btn-secondary">
+                            <button class="btn btn-secondary" type="submit">
                                 {{ __('ログイン') }}
                             </button>
                             <!-- パスワード再設定 -->

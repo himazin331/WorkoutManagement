@@ -7,7 +7,7 @@
 @section('title', 'アカウント登録')
 <!-- CSS -->
 @section('pageCSS')
-    <link href="./css/login_register.css" rel="stylesheet">
+<link href="./css/login_register.css" rel="stylesheet">
 @endsection
 
 <!-- メイン -->
@@ -16,16 +16,16 @@
 <div class="row justify-content-center">
     <div class="col-md-8">
         <div class="card card-main">
-            <div class="card-header bg-secondary text-white">{{ __('アカウント登録') }}</div>
+            <div class="card-header bg-secondary text-white">アカウント登録</div>
             <div class="card-body card-body-main">
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
                     <!-- ユーザID -->
                     <div class="form-group row">
-                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('ユーザID (英数字)') }}</label>
+                        <label class="col-md-4 col-form-label text-md-right" for="name">ユーザID (英数字)<span class="required">*</span></label>
                         <div class="col-md-6">
-                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-                            <!-- 不正なユーザID入力時の処理 -->
+                            <input class="form-control @error('name') is-invalid @enderror" id="name" type="text"  name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                            <!-- エラーメッセージ -->
                             @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -35,13 +35,13 @@
                     </div>
                     <!-- 性別 -->
                     <div class="form-group row">
-                        <label for="gender" class="col-md-4 col-form-label text-md-right">性別</label>
+                        <label class="col-md-4 col-form-label text-md-right" for="gender">性別<span class="required">*</span></label>
                         <div class="col-md-6" style="padding-top: 8px">
-                            <input id="gender-m" type="radio" class="@error('gender') is-invalid @enderror" name="gender" value="male" checked>
+                            <input class="@error('gender') is-invalid @enderror" id="gender-m" type="radio" name="gender" value="male" checked>
                             <label for="gender-m">男性</label>
-                            <input id="gender-f" type="radio" class="@error('gender') is-invalid @enderror" name="gender" value="female">
+                            <input class="@error('gender') is-invalid @enderror" id="gender-f" type="radio" name="gender" value="female">
                             <label for="gender-f">女性</label>
-                            <!-- 不正な性別入力時の処理 -->
+                            <!-- エラーメッセージ -->
                             @error('gender')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -51,11 +51,37 @@
                     </div>
                     <!-- 生年月日 -->
                     <div class="form-group row">
-                        <label for="birthday" class="col-md-4 col-form-label text-md-right">生年月日</label>
+                        <label class="col-md-4 col-form-label text-md-right" for="birthday">生年月日<span class="required">*</span></label>
                         <div class="col-md-6">
-                            <input id="birthday" type="date" class="form-control @error('birthday') is-invalid @enderror" name="birthday" value="{{ old('birthday') }}" required>
-                            <!-- 不正な生年月日入力時の処理 -->
+                            <input class="form-control @error('birthday') is-invalid @enderror" id="birthday" type="date" name="birthday" value="{{ old('birthday') }}" required>
+                            <!-- エラーメッセージ -->
                             @error('birthday')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <!-- 身長 -->
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label text-md-right" for="stature">身長(cm)<span class="required">*</span></label>
+                        <div class="col-md-6">
+                            <input class="form-control @error('stature') is-invalid @enderror" id="stature" type="number" name="stature" value="{{ old('stature') }}" step="0.01" min="1" max="999.99" required autocomplete="stature">
+                            <!-- エラーメッセージ -->
+                            @error('stature')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <!-- 体重 -->
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label text-md-right" for="weight">体重(kg)<span class="required">*</span></label>
+                        <div class="col-md-6">
+                            <input class="form-control @error('weight') is-invalid @enderror" id="weight" type="number" name="weight" value="{{ old('weight') }}" step="0.01" min="1" max="999.99" required autocomplete="weight">
+                            <!-- エラーメッセージ -->
+                            @error('weight')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -64,10 +90,10 @@
                     </div>
                     <!-- メールアドレス -->
                     <div class="form-group row">
-                        <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('メールアドレス') }}</label>
+                        <label class="col-md-4 col-form-label text-md-right" for="email">メールアドレス<span class="required">*</span></label>
                         <div class="col-md-6">
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-                            <!-- 不正なメールアドレス入力時の処理 -->
+                            <input class="form-control @error('email') is-invalid @enderror" id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="email">
+                            <!-- エラーメッセージ -->
                             @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -77,10 +103,10 @@
                     </div>
                     <!-- パスワード -->
                     <div class="form-group row">
-                        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('パスワード') }}</label>
+                        <label class="col-md-4 col-form-label text-md-right" for="password">パスワード (8文字以上)<span class="required">*</span></label>
                         <div class="col-md-6">
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-                            <!-- 不正なパスワード入力時の処理 -->
+                            <input class="form-control @error('password') is-invalid @enderror" id="password" type="password" name="password" required autocomplete="new-password">
+                            <!-- エラーメッセージ -->
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -90,10 +116,10 @@
                     </div>
                     <!-- パスワード(確認) -->
                     <div class="form-group row">
-                        <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('パスワード (確認)') }}</label>
+                        <label class="col-md-4 col-form-label text-md-right" for="password-confirm">パスワード (確認)<span class="required">*</span></label>
                         <div class="col-md-6">
-                            <input id="password-confirm" type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" required autocomplete="new-password">
-                            <!-- 不正なパスワード(確認)入力時の処理 -->
+                            <input class="form-control @error('password_confirmation') is-invalid @enderror" id="password-confirm" type="password" name="password_confirmation" required autocomplete="new-password">
+                            <!-- エラーメッセージ -->
                             @error('password_confirmation')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -101,12 +127,13 @@
                             @enderror
                         </div>
                     </div>
+                    <p class="required">* 回答必須項目</p>
 
                     <!-- 登録submit -->
                     <div class="form-group row mb-0">
                         <div class="col-md-6 offset-md-4">
                             <!-- 登録submit -->
-                            <button type="submit" class="btn btn-secondary">
+                            <button class="btn btn-secondary" type="submit">
                                 {{ __('登録') }}
                             </button>
                         </div>

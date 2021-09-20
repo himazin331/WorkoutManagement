@@ -1,0 +1,48 @@
+/** '記録をみる'ページCSS */
+
+/** container */
+/* エラーメッセージ */
+.invalid-feedback {
+    display: inline;
+}
+
+/* 記録検索フィルタ */
+.filter-field {
+    margin-bottom: 15px;
+    border: none;
+}
+.filter-field-header {
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 4px 4px 0 0;
+}
+.filter-field-body {
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0 0 4px 4px;
+}
+.filter-field-in {
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+}
+.filter-field-in .card {
+    margin: 1rem 1rem;
+}
+.filter-field-in-header {
+    background-color: white;
+}
+
+.submit-btn {
+    margin: auto 0;
+}
+
+/* トレーニングメニュー記録 */
+.trainingmenu, .calorie {
+    margin-bottom: 10px;
+}
+.tr-records-list, .cl-record-list {
+    padding: 5px;
+}
+.tr-record-label, .cl-record-label {
+    font-weight: bold;
+    font-size: 20px;
+}

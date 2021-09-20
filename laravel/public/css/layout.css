@@ -1,0 +1,105 @@
+/** 共通CSS */
+
+/** 全体 */
+body {
+    display: flex;
+    flex-flow: column;
+    min-height: 100vh;
+    min-width: 320px;
+}
+img {
+    color: white;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    -moz-appearance:textfield;
+}
+
+/** header */
+header {
+    box-shadow: 1px 3px 3px gray;
+    margin-bottom: 50px;
+    padding: 0 20px;
+}
+
+/* ナビゲーション */
+.dropdown-normal {
+    margin-left: auto;
+    margin-right: 20px;
+}
+.dropdown-toggle {
+    padding: 5px;
+    border-color: rgba(255,255,255,.1);
+}
+.account-info-img {
+    opacity: 0.55;
+}
+.dropdown-menu {
+    width: 5vh;
+    border: 1px solid rgba(255,255,255,.55);
+}
+.navbar-nav {
+    width: auto;
+}
+.dropdown-small {
+    margin-top: 10px;
+}
+.dropdown-item {
+    color: rgba(255,255,255,.55) !important;
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+}
+.nav-item-nest-content {
+    color: rgba(255,255,255,.55);
+    pointer-events: auto;
+}
+.nav-item-nest-content:hover, .dropdown-item:hover {
+    color: rgba(255,255,255,.75) !important;
+}
+.nav-item-nest {
+    text-indent: 1em;
+    pointer-events: auto;
+}
+
+/** container */
+.wrapper {
+    flex: 1;
+}
+
+/* 返却メッセージ */
+.r-message {
+    top: 80px;
+    animation: fadeOut 1s ease 3s forwards;
+}
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* 入力フィールド */
+.form-control:focus {
+    border-color: #565e64 !important;
+    box-shadow: 0 0 0 0.25rem rgb(130 138 145 / 50%) !important;
+}
+
+/** footer */
+footer {
+    padding: 20px 0;
+    text-align: center;
+}
+
+/** レスポンシブ */
+@media (max-width: 420px)
+{
+    .navbar-brand-img {
+        width: 200px;
+        height: 33px;
+    }
+}

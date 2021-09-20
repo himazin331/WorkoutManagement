@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class RouteServiceProvider extends ServiceProvider
 {
     /* デフォルトリダイレクト先 */
-    public const HOME = '/index.php';
+    public const HOME = '/';
 
     /* ルーティング設定呼び出し先の設定など */
     public function boot()

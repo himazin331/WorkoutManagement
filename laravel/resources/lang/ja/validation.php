@@ -118,9 +118,11 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message'
         ],
+        //* 認証系
         // ユーザID
         'name' => [
             'required' => ':attributeを入力してください。',
+            'string' => '不正な入力です。',
             'max' => ':attributeは:max文字以内で入力してください。',
             'regex' => ':attributeには英数字以外を入力しないでください。',
             'unique' => 'その:attributeは既に使用されています。'
@@ -137,6 +139,20 @@ return [
             'before_or_equal' => ':date以前の日付を選択してください。',
             'after_or_equal' => ':date以降の日付を選択してください。'
         ],
+        // 身長
+        'stature' => [
+            'required' => ':attributeを入力してください。',
+            'numeric' => ':attributeを正しく入力してください。',
+            'between' => ':attributeは:minから:maxまでの数値のみ有効です。',
+            'regex' => ':attributeは小数第二位まで有効です。'
+        ],
+        // 体重
+        'weight' => [
+            'required' => ':attributeを入力してください。',
+            'numeric' => ':attributeを正しく入力してください。',
+            'between' => ':attributeは:minから:maxまでの数値のみ有効です。',
+            'regex' => ':attributeは小数第二位まで有効です。'
+        ],
         // メールアドレス
         'email' => [
             'required' => ':attributeを入力してください。',
@@ -147,22 +163,138 @@ return [
         // パスワード
         'password' => [
             'required' => ':attributeを入力してください。',
+            'string' => '不正な入力です。',
             'min' => ':attributeは:min文字以上で入力してください。',
         ],
         // パスワード(確認)
         'password_confirmation' => [
             'required' => ':attributeを入力してください。',
+            'string' => '不正な入力です。',
             'same' => ':attributeが一致しません。'
+        ],
+        //* 記録
+        // 記録日
+        'record_date' => [
+            'required' => ':attributeを入力してください。',
+            'date' => ':attributeを正しく入力してください。',
+            'before_or_equal' => ':date以前の日付を選択してください。',
+            'after_or_equal' => ':date以降の日付を選択してください。'
+        ],
+        // トレーニングメニュ－記録
+        'trdata.tm_add_preset' => [
+            'in' => '不正な入力です。',
+        ],
+        'trdata.tm_preset_name' => [
+            'required_if' => ':attributeを入力してください。',
+            'string' => '不正な入力です。',
+        ],
+        'trdata.tm_item_name_h.*' => [
+            'string' => '不正な入力です。',
+        ],
+        'trdata.tm_item_name.*' => [
+            'string' => '不正な入力です。',
+        ],
+        // 摂取カロリー記録
+        'cldata.cl_item_name1.*' => [
+            'string' => '不正な入力です。',
+        ],
+        'cldata.cl_item_name2.*' => [
+            'numeric' => ':attributeを正しく入力してください。',
+            'min' => ':attributeは:min以上の数値のみ有効です。',
+            'regex' => ':attributeは小数第二位まで有効です。'
+        ],
+        // 画像記録
+        'pidata.upload_file.*' => [
+            'url' => '不正な入力です。',
+            'regex' => '.jpeg .jpg .png以外の:attribute、ファイル名に !%~\'()._- 以外の記号や特殊文字が含まれる:attributeはアップロードできません。'
+        ],
+        // 身体情報
+        // 身長
+        'bidata.stature' => [
+            'required' => ':attributeを入力してください。',
+            'numeric' => ':attributeを正しく入力してください。',
+            'between' => ':attributeは:minから:maxまでの数値のみ有効です。',
+            'regex' => ':attributeは小数第二位まで有効です。'
+        ],
+        // 体重
+        'bidata.weight' => [
+            'required' => ':attributeを入力してください。',
+            'numeric' => ':attributeを正しく入力してください。',
+            'between' => ':attributeは:minから:maxまでの数値のみ有効です。',
+            'regex' => ':attributeは小数第二位まで有効です。'
+        ],
+        // 体脂肪率
+        'bidata.bodyfat' => [
+            'numeric' => ':attributeを正しく入力してください。',
+            'between' => ':attributeは:minから:maxまでの数値のみ有効です。',
+            'regex' => ':attributeは小数第二位まで有効です。'
+        ],
+        // 筋肉量
+        'bidata.muscle' => [
+            'numeric' => ':attributeを正しく入力してください。',
+            'between' => ':attributeは:minから:maxまでの数値のみ有効です。',
+            'regex' => ':attributeは小数第二位まで有効です。'
+        ],
+        //* 目標設定
+        // 体重(目標)
+        'weightg' => [
+            'numeric' => ':attributeを正しく入力してください。',
+            'between' => ':attributeは:minから:maxまでの数値のみ有効です。',
+            'regex' => ':attributeは小数第二位まで有効です。'
+        ],
+        // BMI(目標)
+        'bmig' => [
+            'numeric' => ':attributeを正しく入力してください。',
+            'between' => ':attributeは:minから:maxまでの数値のみ有効です。',
+            'regex' => ':attributeは小数第二位まで有効です。'
+        ],
+        // 体脂肪率(目標)
+        'bodyfatg' => [
+            'numeric' => ':attributeを正しく入力してください。',
+            'between' => ':attributeは:minから:maxまでの数値のみ有効です。',
+            'regex' => ':attributeは小数第二位まで有効です。'
+        ],
+        // 筋肉量(目標)
+        'muscleg' => [
+            'numeric' => ':attributeを正しく入力してください。',
+            'between' => ':attributeは:minから:maxまでの数値のみ有効です。',
+            'regex' => ':attributeは小数第二位まで有効です。'
         ]
     ],
 
     // :attribute定義
     'attributes' => [
+        //* 認証系
         'name' => 'ユーザID',
         'gender' => '性別',
         'birthday' => '生年月日',
+        'stature' => '身長',
+        'weight' => '体重',
         'email' => 'メールアドレス',
         'password' => 'パスワード',
-        'password_confirmation' => 'パスワード'
+        'password_confirmation' => 'パスワード',
+        //* 記録
+        // 記録日
+        'record_date' => '記録日',
+        // トレーニングメニュ－記録
+        'trdata.tm_add_preset' => 'プリセット',
+        'trdata.tm_preset_name' => 'プリセット名',
+        'trdata.tm_item_name_h.*' => '項目名',
+        'trdata.tm_item_name.*' => '入力値',
+        // 摂取カロリー記録
+        'cldata.cl_item_name1.*' => '食品名',
+        'cldata.cl_item_name2.*' => '栄養成分量',
+        // 画像記録
+        'pidata.upload_file.*' => 'ファイル',
+        // 身体情報
+        'bidata.stature' => '身長',
+        'bidata.weight' => '体重',
+        'bidata.bodyfat' => '体脂肪率',
+        'bidata.muscle' => '筋肉量',
+        //* 目標設定
+        'weightg' => '体重',
+        'bmig' => 'BMI',
+        'bodyfatg' => '体脂肪率',
+        'muscleg' => '筋肉量'
     ],
 ];
