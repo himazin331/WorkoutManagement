@@ -24,11 +24,16 @@ class VRecordsController extends Controller
         $user = Auth::user(); // ユーザ情報取得
 
         $trainingmenu = TbUsersTrainingmenu::getRecentTrainingmenu($user['id']); // トレーニングメニュー記録(直近)
-        $trpreset = TbUsersTrainingmenu::getNumPreset($user['id'], $trainingmenu[0]->preset_id); // プリセット
+        if (count($trainingmenu) > 0) {
+            $trpreset = TbUsersTrainingmenu::getNumPreset($user['id'], $trainingmenu[0]->preset_id); // プリセット
+        } else {
+            $trpreset = [];
+        }
         $calorie = TbUsersCalorie::getRecentCalorie($user['id']);  // 摂取カロリー記録(直近)
-        $bodyinfo = TbUsersBodyinfo::getRecentBodyinfo($user['id']);// 身体情報
+        $picture = TbUsersPicture::getRecentPicture($user['id']); // 画像記録(直近)
+        $bodyinfo = TbUsersBodyinfo::getRecentBodyinfo($user['id']);// 身体情報(直近)
 
-        return view('EWM.viewRecords', compact('trainingmenu', 'trpreset', 'calorie'));
+        return view('EWM.viewRecords', compact('trainingmenu', 'trpreset', 'calorie', 'picture', 'bodyinfo'));
     }
 
     public function recordsGet() {

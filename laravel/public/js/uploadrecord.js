@@ -183,7 +183,7 @@ function create_pidata(files, pidata) {
                     pidata.upload_file['image_'+(i+1)] = [file_name, file_mime, fr.result];
                     resolve(pidata);
                 }, false);
-                fr.readAsDataURL(file); // Base64エンコード
+                fr.readAsDataURL(file); // バイナリ -> DataURI
             });
         }
 
