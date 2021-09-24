@@ -76,6 +76,7 @@ class CreateTbUser extends Model
             $table->float('muscle', 5, 2)->nullable();
             $table->float('muscle_diff', 5, 2)->nullable();
             $table->float('muscle_per', 5, 2)->nullable();
+            $table->date('record_date');
             $table->timestamps();
         });
 
@@ -100,7 +101,8 @@ class CreateTbUser extends Model
         Schema::create($table_name, function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->text('data');
+            $table->text('file_name');
+            $table->text('file_url');
             $table->date('record_date');
             $table->timestamps();
         });

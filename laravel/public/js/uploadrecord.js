@@ -5,13 +5,6 @@
 // ! 　　　追加分入力フィールドが消滅
 // ! メモ: rjs002と関係性高
 // ! ----------------------------------------------------------------
-// ! ----------------------------------------------------------------
-// !                         要修正 lv.4 - rjs006
-// ! 更新日: 2021/09/15
-// ! 概要: バリデーションによる異常入力の検知後returnでDB登録されないと
-// ! 　　　してもS3に画像がアップロードされてしまう
-// ! メモ: PHPで行うことを検討
-// ! ----------------------------------------------------------------
 // TODO ----------------------------------------------------------------
 // TODO                      未実装 lv.3 - rjs004
 // TODO 更新日: 2021/09/16
@@ -176,45 +169,32 @@ function create_cldata() {
 }
 
 //* 画像記録
-const region = "us-east-1"; // リージョン
-const poolId = "us-east-1:7cfd8d7b-462d-458b-8f6b-f0acf9f6534e"; // Cognito IDプール
-const aws_uploadBucket = "ewms3"; // S3バケット
-
-AWS.config.region = region;
-AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-    IdentityPoolId: poolId
-});
-// アップロード準備
-function upload_setup(uf, pidata){
-    // S3アップロード&データ構築
-    return new Promise(function create_pidata(resolve, reject) {
-        // アップロード
-        function S3upload (i) {
+function create_pidata(files, pidata) {
+    return new Promise(function FileToBase64(resolve, reject) {
+        function _FileToBase64(i) {
             return new Promise(function(resolve, reject){
-                    const data = new AWS.S3.ManagedUpload({
-                    params: {
-                        Bucket: aws_uploadBucket,
-                        Key: uf[i].name,
-                        Body: uf[i],
-                        ContentType: uf[i].type,
-                        ACL: 'public-read'
-                    }
-                }).promise()
-                .then(function(data){ // URL格納
-                    pidata.upload_file['image_'+(i+1)] = data.Location;
-                    resolve(data);
-                });
+                var file_name = files[i].name;
+                var file_mime = files[i].type;
+                var file = files[i];
+        
+                var fr = new FileReader();
+                // エンコード完了後データ構築
+                fr.addEventListener('load', function(){
+                    pidata.upload_file['image_'+(i+1)] = [file_name, file_mime, fr.result];
+                    resolve(pidata);
+                }, false);
+                fr.readAsDataURL(file); // Base64エンコード
             });
         }
 
+        // 逐次処理
         (async ()=>{
-            const index_list = [...Array(uf.length)].map((_, i) => i); // インデックスリスト
-            // アップロード関数呼び出し
+            const index_list = [...Array(files.length)].map((_, i) => i); // インデックスリスト
             const promise_result = await Promise.all(index_list.map(async function(i){
-                const r = await S3upload(i);
+                const r = await _FileToBase64(i);
                 return r;
             }));
-            // 全てのアップロード処理が完了したら返却
+
             resolve(pidata);
         })();
     });
@@ -233,33 +213,31 @@ function create_bidata() {
     return bidata;
 }
 
-
 //* 各記録データ構築
-const sbtn = document.getElementById('js-submit-btn');
+const sbtn = document.getElementById('js-submit-btn'); // submitボタン
 function create_datas() {
-    const uf = document.getElementById('js-upload-file').files;
-
+    let data;
     const trdata = create_trdata();
     const cldata = create_cldata();
     const bidata = create_bidata();
+    const uf = document.getElementById('js-upload-file').files; // ファイルデータ
     let dummy_pidata = {
         upload_file: {}
     };
-    let data;
 
     if (uf.length > 0) { // ファイル入力がある
-        pidata = upload_setup(uf, dummy_pidata).then(function(create_pidata){
+        pidata = create_pidata(uf, dummy_pidata).then(function(FileToBase64){
             data = {
                 record_date: document.getElementById('js-record-date').value,
                 trdata: trdata,
                 cldata: cldata,
                 bidata: bidata,
-                pidata: create_pidata
+                pidata: FileToBase64
             };
             document.getElementById('js-shaping-recorddata').value = JSON.stringify(data);
             sbtn.click();
         });
-    } else { // ファイル入力がない -> 
+    } else { // ファイル入力がない
         data = {
             record_date: document.getElementById('js-record-date').value,
             trdata: trdata,
@@ -271,3 +249,8 @@ function create_datas() {
         sbtn.click();
     }
 }
+// アップロードに時間がかかっている場合にアラート
+const form = document.getElementById('js-form');
+form.addEventListener('submit', function(){
+    setTimeout(function(){alert("処理に時間がかかっています。いま暫くお待ち下さい。\n(この表示がでた場合はOKボタンを押してください)")}, 3000);
+})

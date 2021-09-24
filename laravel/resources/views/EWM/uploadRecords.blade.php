@@ -560,7 +560,5 @@
 </script>
 
 <!-- 記録関係 -->
-<!-- AWS-SDKの読み込み -->
-<script src="https://sdk.amazonaws.com/js/aws-sdk-2.857.0.min.js"></script>
 <script src="./js/uploadrecord.js"></script>
 @endsection

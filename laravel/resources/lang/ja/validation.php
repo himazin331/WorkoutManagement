@@ -204,9 +204,24 @@ return [
             'regex' => ':attributeは小数第二位まで有効です。'
         ],
         // 画像記録
-        'pidata.upload_file.*' => [
-            'url' => '不正な入力です。',
-            'regex' => '.jpeg .jpg .png以外の:attribute、ファイル名に !%~\'()._- 以外の記号や特殊文字が含まれる:attributeはアップロードできません。'
+        // ファイル名
+        'pidata.upload_file.*.0' => [
+            'required_with' => '不正な入力です。',
+            'string' => ':attributeが不正です。',
+            'unique' => '過去にアップロードしたファイルと:attributeが重複しています。:attributeを変更してください。',
+            'regex' => '.jpeg .jpg .png以外のファイルタイプ、:attributeに !%~\'()._- 以外の記号や特殊文字が含まれるファイルはアップロードできません。'
+        ],
+        // ファイルタイプ
+        'pidata.upload_file.*.1' => [
+            'required_with' => '不正な入力です。',
+            'string' => ':attributeが不正です。',
+            'regex' => ':attributeがjpeg .jpg .png以外のファイルはアップロードできません。'
+        ],
+        // ファイル
+        'pidata.upload_file.*.2' => [
+            'required_with' => '不正な入力です。',
+            'string' => ':attributeが不正です。',
+            'regex' => ':attributeが不正です。'
         ],
         // 身体情報
         // 身長
@@ -285,7 +300,9 @@ return [
         'cldata.cl_item_name1.*' => '食品名',
         'cldata.cl_item_name2.*' => '栄養成分量',
         // 画像記録
-        'pidata.upload_file.*' => 'ファイル',
+        'pidata.upload_file.*.0' => 'ファイル名',
+        'pidata.upload_file.*.1' => 'ファイルタイプ',
+        'pidata.upload_file.*.2' => 'ファイル',
         // 身体情報
         'bidata.stature' => '身長',
         'bidata.weight' => '体重',

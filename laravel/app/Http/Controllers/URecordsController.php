@@ -18,13 +18,6 @@
  * View:            resources\views\EWM\uploadRecords.blade.php
 */
 
-// ! ----------------------------------------------------------------
-// !                     要修正 lv.4 - uc001
-// ! 更新日: 2021/09/17
-// ! 概要: Amazon S3 PHP実装
-// ! ----------------------------------------------------------------
-
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request; // HTTPリクエストモジュール
@@ -37,7 +30,7 @@ use App\Models\records\TbUsersCalorie; // 摂取カロリー記録テーブル�
 use App\Models\records\TbUsersPicture; // 画像記録テーブル操作モジュール
 use App\Models\records\TbUsersBodyinfo; // 身体情報テーブル操作モジュール
 use App\Models\TbUsersGoals; // 目標テーブル操作モジュール
-
+use App\Libraries\S3File; // S3モジュール
 
 class URecordsController extends Controller
 {
@@ -101,6 +94,7 @@ class URecordsController extends Controller
 
         //* バリデーション
         // バリデーションルール
+        $table = 'tb_user'.sprintf('%05d', $user['id']).'_picture';
         $rules = [
             // 記録日
             'record_date' => ['required', 'date', 'before_or_equal:'.date('Y/m/d'), 'after_or_equal:'.str_replace("-", "/", $user['birthday'])],
@@ -113,7 +107,9 @@ class URecordsController extends Controller
             'cldata.cl_item_name1.*' => ['nullable', 'string'],
             'cldata.cl_item_name2.*' => ['nullable', 'numeric', 'min:0', 'regex:/\A\d+(\.\d{1,2})?\z/'],
             // 画像記録
-            'pidata.upload_file.*' => ['nullable', 'string', 'regex:/https:\/\/ewms3\.s3\.amazonaws\.com\/[a-zA-Zぁ-んァ-ヶ一-龠々0-9０-９!~\'\(\)\._%-]+\.(jpeg|jpg|png)$/'],
+            'pidata.upload_file.*.0' => ['required_with:pidata.upload_file.*.1,pidata.upload_file.*.2', 'nullable', 'string', 'unique:'.$table.',file_name', 'regex:/^[a-zA-Zぁ-んァ-ヶ一-龠々0-9０-９!~\'\(\)\._%-]+\.(jpeg|jpg|png)$/'],
+            'pidata.upload_file.*.1' => ['required_with:pidata.upload_file.*.0,pidata.upload_file.*.2', 'nullable', 'string', 'regex:/^image\/(png|jpeg)$/'],
+            'pidata.upload_file.*.2' => ['required_with:pidata.upload_file.*.0,pidata.upload_file.*.1', 'nullable', 'string', 'regex:/^data:image\/(png|jpeg);base64,/'],
             // 身体情報記録
             'bidata.stature' => ['nullable', 'numeric', 'between:1,999.99', 'regex:/\A\d{1,3}(\.\d{1,2})?\z/'],
             'bidata.weight' => ['nullable', 'numeric', 'between:1,999.99', 'regex:/\A\d{1,3}(\.\d{1,2})?\z/'],
@@ -152,7 +148,6 @@ class URecordsController extends Controller
                 return redirect(route('ulpicture.view'))->with('rmessage', "問題が発生しました。"); // 失敗
             }
         }
-        
 
         //* 身体情報記録
         if (!(empty($items['bidata']['stature']) && empty($items['bidata']['weight']) &&
@@ -167,9 +162,9 @@ class URecordsController extends Controller
         //* ユーザ情報更新
         $r = TbUsersBodyinfo::getRecentBodyinfo($user['id']);
         $data = [
-            'age' => $r->age,
-            'stature' => $r->stature,
-            'weight' => $r->weight,
+            'age' => $r[0]->age,
+            'stature' => $r[0]->stature,
+            'weight' => $r[0]->weight,
             'updated_at' => date("Y/m/d H:i:s")
         ];
         $r = TbUsers::updateUser($user['id'], $data); // ユーザ情報更新
@@ -266,11 +261,18 @@ class URecordsController extends Controller
 
     //* 画像データ記録
     public function pictureFunc($user_id, $record_date, $items) {
+        // S3アップロード
+        $r = S3File::upload($items['upload_file']);
+        if (!$r) { // 失敗
+            return false;
+        }
+
         for($i = 1; $i < count($items['upload_file'])+1; $i++)
         {
             $data = [
                 'user_id' => $user_id,
-                'data' => $items['upload_file']['image_'.$i],
+                'file_name' => $items['upload_file']['image_'.$i][0],
+                'file_url' => "https://ewms3.s3.amazonaws.com/".$items['upload_file']['image_'.$i][0],
                 'record_date' => $record_date,
                 'created_at' => date("Y/m/d H:i:s")
             ];
@@ -397,6 +399,7 @@ class URecordsController extends Controller
                 'muscle' => $muscle,
                 'muscle_diff' => $diff_m,
                 'muscle_per' => $per_m,
+                'record_date' => $record_date,
                 'created_at' => date("Y/m/d H:i:s")
             ];
         } else {
@@ -408,6 +411,7 @@ class URecordsController extends Controller
                 'bmi' => $bmi,
                 'bodyfat' => $bodyfat,
                 'muscle' => $muscle,
+                'record_date' => $record_date,
                 'created_at' => date("Y/m/d H:i:s")
             ];
         }
