@@ -86,6 +86,7 @@ class RegisterController extends Controller
             'stature' => $stature,
             'weight' => $weight,
             'bmi' => $bmi,
+            'record_date' => date("Y/m/d"),
             'created_at' => date("Y/m/d H:i:s")
         ];
         TbUsersBodyinfo::insertBodyinfo($user->id, $data); // 身体情報挿入

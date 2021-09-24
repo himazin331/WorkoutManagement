@@ -36,14 +36,14 @@ class EWMController extends Controller
                 $goal_diff = "";
             } else { // 目標設定済み
                 $goal_diff = array(
-                    'weight_diff' => $bodyinfo->weight_diff,
-                    'weight_per' => $bodyinfo->weight_per,
-                    'bmi_diff' => $bodyinfo->bmi_diff,
-                    'bmi_per' => $bodyinfo->bmi_per,
-                    'bodyfat_diff' => $bodyinfo->bodyfat_diff,
-                    'bodyfat_per' => $bodyinfo->bodyfat_per,
-                    'muscle_diff' => $bodyinfo->muscle_diff,
-                    'muscle_per' => $bodyinfo->muscle_per
+                    'weight_diff' => $bodyinfo[0]->weight_diff,
+                    'weight_per' => $bodyinfo[0]->weight_per,
+                    'bmi_diff' => $bodyinfo[0]->bmi_diff,
+                    'bmi_per' => $bodyinfo[0]->bmi_per,
+                    'bodyfat_diff' => $bodyinfo[0]->bodyfat_diff,
+                    'bodyfat_per' => $bodyinfo[0]->bodyfat_per,
+                    'muscle_diff' => $bodyinfo[0]->muscle_diff,
+                    'muscle_per' => $bodyinfo[0]->muscle_per
                 ); 
             }
         } else { // 未ログイン時

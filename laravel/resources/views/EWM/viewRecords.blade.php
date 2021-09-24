@@ -191,8 +191,8 @@
     <div id="tr-records-field">
         @if (count($trainingmenu) > 0)
             <div>
-                <details class="tr-records-list">
-                    <summary class="tr-record-label">{{ $trainingmenu[0]->record_date }}</summary>
+                <details class="records-list" open>
+                    <summary class="records-label">{{ str_replace('-','/',$trainingmenu[0]->record_date) }}</summary>
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -226,24 +226,24 @@
 </div>
 
 <!-- 摂取カロリー記録 -->
-<div id="calorie">
+<div class="calorie" id="calorie">
     <h4>摂取カロリー記録</h4>
     <hr>
 
     <div id="cl-records-field">
         @if (count($calorie) > 0)
             <div>
-                <details class="cl-records-list">
-                    <summary class="cl-record-label">{{ $calorie[0]->record_date }}</summary>
+                <details class="records-list" open>
+                    <summary class="records-label">{{ str_replace('-','/',$calorie[0]->record_date) }}</summary>
                     <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th>食品名</th>
-                                <th>カロリー</th>
-                                <th>たんぱく質</th>
-                                <th>脂質</th>
-                                <th>炭水化物</th>
-                                <th>糖質</th>
+                                <th>カロリー(kcal)</th>
+                                <th>たんぱく質(g)</th>
+                                <th>脂質(g)</th>
+                                <th>炭水化物(g)</th>
+                                <th>糖質(g)</th>
                                 <th>自由記述</th>
                             </tr>
                         </thead>
@@ -256,7 +256,7 @@
                                 <td>{{ $c->fat }}</td>
                                 <td>{{ $c->carbohydrates }}</td>
                                 <td>{{ $c->sugar }}</td>
-                                <td>{{ $c->free }}</td>
+                                <td>{{ ($c->free)? $c->free:"－" }}</td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -272,42 +272,86 @@
 </div>
 
 <!-- 画像記録 -->
-<div id="picture">
+<div class="picture" id="picture">
     <h4>画像記録</h4>
     <hr>
 
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>画像</th>
-                <th>ファイル名</th>
-                <th>記録日</th>
-                <th>編集</th>
-            </tr>
-        </thead>
-        <tbody id="pi-records-list">
-        </tbody>
-    </table>
+    <div id="pi-records-field">
+        @if (count($picture) > 0)
+            <div>
+                <details class="records-list" open>
+                    <summary class="records-label">{{ str_replace('-','/',$picture[0]->record_date) }}</summary>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>画像</th>
+                                <th>ファイル名</th>
+                                <th>記録日</th>
+                                <th>編集</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pi-records-list">
+                        @foreach ($picture as $p)
+                            <tr>
+                                <td class="w-50"><img class="record-img" src="{{ $p->file_url }}"></td>
+                                <td>{{ $p->file_name }}</td>
+                                <td>{{ $p->record_date }}</td>
+                                <td>－</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </details>
+            </div>
+        @else
+        <div>
+            NO DATA
+        </div>
+        @endif
+    </div>
 </div>
 
 <!-- 身体情報記録 -->
-<div id="bodyinfo">
+<div class="bodyinfo" id="bodyinfo">
     <h4>身体情報記録</h4>
     <hr>
 
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>体重</th>
-                <th>BMI</th>
-                <th>体脂肪率</th>
-                <th>筋肉量</th>
-                <th>記録日</th>
-            </tr>
-        </thead>
-        <tbody id="bi-records-list">
-        </tbody>
-    </table>
+    <div id="bi-records-field">
+        
+        @if (count($bodyinfo) > 0)
+            <div>
+                <details class="records-list" open>
+                    <summary class="records-label">{{ str_replace('-','/',$bodyinfo[0]->record_date) }}</summary>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>身長(cm)</th>
+                                <th>体重(kg)</th>
+                                <th>BMI</th>
+                                <th>体脂肪率(%)</th>
+                                <th>筋肉量(kg)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="records-list">
+                        @foreach ($bodyinfo as $b)
+                            <tr>
+                                <td>{{ $b->stature }}</td>
+                                <td>{{ $b->weight }}</td>
+                                <td>{{ $b->bmi }}</td>
+                                <td>{{ ($b->bodyfat)? $b->bodyfat:"－" }}</td>
+                                <td>{{ ($b->muscle)? $b->muscle:"－" }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </details>
+            </div>
+        @else
+        <div>
+            NO DATA
+        </div>
+        @endif
+    </div>
 </div>
 
 <!-- javascript -->

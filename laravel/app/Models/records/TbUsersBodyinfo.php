@@ -12,7 +12,7 @@ class TbUsersBodyinfo extends Model
     public static function getRecentBodyinfo($user_id){
         $table = "tb_user".sprintf("%05d", $user_id)."_bodyinfo";
         
-        $r = DB::table($table)->orderByDesc('created_at')->first();
+        $r = DB::table($table)->orderByDesc('record_date')->limit(1)->get();
         return $r;
     }
 

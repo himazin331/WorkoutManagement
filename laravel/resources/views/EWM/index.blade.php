@@ -69,11 +69,11 @@
                 @auth
                 <?php 
                 $text = "<dl>
-                            <dt>体重</dt><dd>".(($bodyinfo->weight!=null)?$bodyinfo->weight." kg":"未設定")."</dd>
-                            <dt>BMI</dt><dd>".(($bodyinfo->bmi!=null)?$bodyinfo->bmi:"未設定")."</dd>
-                            <dt>体脂肪率</dt><dd>".(($bodyinfo->bodyfat!=null)?$bodyinfo->bodyfat." %":"未設定")."</dd>
-                            <dt>筋肉量</dt><dd>".(($bodyinfo->muscle!=null)?$bodyinfo->muscle." kg":"未設定")."</dd>
-                            <dt>設定日時</dt><dd>".(($bodyinfo->created_at!=null)?str_replace("-", "/", $bodyinfo->created_at):"未設定")."</dd>
+                            <dt>体重</dt><dd>".(($bodyinfo[0]->weight!=null)?$bodyinfo[0]->weight." kg":"未設定")."</dd>
+                            <dt>BMI</dt><dd>".(($bodyinfo[0]->bmi!=null)?$bodyinfo[0]->bmi:"未設定")."</dd>
+                            <dt>体脂肪率</dt><dd>".(($bodyinfo[0]->bodyfat!=null)?$bodyinfo[0]->bodyfat." %":"未設定")."</dd>
+                            <dt>筋肉量</dt><dd>".(($bodyinfo[0]->muscle!=null)?$bodyinfo[0]->muscle." kg":"未設定")."</dd>
+                            <dt>設定日時</dt><dd>".(($bodyinfo[0]->created_at!=null)?str_replace("-", "/", $bodyinfo[0]->created_at):"未設定")."</dd>
                         </dl>";
                 echo $text;
                 ?>

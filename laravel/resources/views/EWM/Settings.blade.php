@@ -44,17 +44,17 @@
         <div class="card-header bg-secondary text-white">身体情報</div>
         <div class="card-body card-body-main">
             <?php 
-                if ($bodyinfo == ""){
+                if ($bodyinfo[0] == ""){
                     $text = "<p>未設定</p>";
                 } else {
                     $text = "<dl>
                                 <dt>年齢</dt><dd>".$age." 歳</dd>
-                                <dt>身長</dt><dd>".$bodyinfo->stature." cm</dd>
-                                <dt>体重</dt><dd>".$bodyinfo->weight." kg</dd>
-                                <dt>BMI</dt><dd>".$bodyinfo->bmi."</dd>
-                                <dt>体脂肪率</dt><dd>".(($bodyinfo->bodyfat!=null)?$bodyinfo->bodyfat." %":"未設定")."</dd>
-                                <dt>筋肉量</dt><dd>".(($bodyinfo->muscle!=null)?$bodyinfo->muscle." kg":"未設定")."</dd>
-                                <dt>記録日時</dt><dd>".str_replace("-", "/", $bodyinfo->created_at)."</dd>
+                                <dt>身長</dt><dd>".$bodyinfo[0]->stature." cm</dd>
+                                <dt>体重</dt><dd>".$bodyinfo[0]->weight." kg</dd>
+                                <dt>BMI</dt><dd>".$bodyinfo[0]->bmi."</dd>
+                                <dt>体脂肪率</dt><dd>".(($bodyinfo[0]->bodyfat!=null)?$bodyinfo[0]->bodyfat." %":"未設定")."</dd>
+                                <dt>筋肉量</dt><dd>".(($bodyinfo[0]->muscle!=null)?$bodyinfo[0]->muscle." kg":"未設定")."</dd>
+                                <dt>記録日時</dt><dd>".str_replace("-", "/", $bodyinfo[0]->created_at)."</dd>
                             </dl>";
                 }
                 echo $text;
