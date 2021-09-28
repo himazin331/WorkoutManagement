@@ -66,12 +66,6 @@ class URecordsController extends Controller
     // ! メモ: DB側はNOT NULL
     // ! ----------------------------------------------------------------
     // ! ----------------------------------------------------------------
-    // !                      要修正 lv.4 - uc082
-    // ! 更新日: 2021/09/16
-    // ! 概要: 摂取カロリー記録 栄養成分量初期化
-    // ! メモ: 各栄養成分量 = 0.00(入力フォーム未入力時の対応)
-    // ! ----------------------------------------------------------------
-    // ! ----------------------------------------------------------------
     // !                      要修正 lv.4 - uc108
     // ! 更新日: 2021/09/16
     // ! 概要: old()動作異常
@@ -210,7 +204,7 @@ class URecordsController extends Controller
         // トレーニングメニュー記録
         $defalut_preset = TbUsersTrainingmenu::getDefaultPreset($user_id); // デフォルトプリセットID
         // 各入力フィールド記録
-        for($i = 1; $i < count($items['tm_item_name'])/5+1; $i++)
+        for ($i = 1; $i < count($items['tm_item_name'])/5+1; $i++)
         {
             $data = [
                 'user_id' => $user_id,
@@ -236,8 +230,17 @@ class URecordsController extends Controller
     public function calorieFunc($user_id, $record_date, $items) {
         // 摂取カロリー記録
         // 各入力フィールド記録
-        for($i = 1; $i < (count($items['cl_item_name1'])+count($items['cl_item_name2']))/7+1; $i++)
+        for ($i = 1; $i < (count($items['cl_item_name1'])+count($items['cl_item_name2']))/7+1; $i++)
         {
+            // 未入力時初期化
+            for ($j = 2; $j < 7; $j++)
+            {
+                if (!$items['cl_item_name2']['cl_item_name'.$i.'_'.$j])
+                {
+                    $items['cl_item_name2']['cl_item_name'.$i.'_'.$j] = 0;
+                }
+            }
+
             $data = [
                 'user_id' => $user_id,
                 'foodname' => $items['cl_item_name1']['cl_item_name'.$i.'_1'],
@@ -267,7 +270,7 @@ class URecordsController extends Controller
             return false;
         }
 
-        for($i = 1; $i < count($items['upload_file'])+1; $i++)
+        for ($i = 1; $i < count($items['upload_file'])+1; $i++)
         {
             $data = [
                 'user_id' => $user_id,
