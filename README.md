@@ -1,3 +1,11 @@
+## URL
+https://esxi.himazin331.com
+(未完成により、バグや動作が安定しないことがあります)
+テスト用ユーザ
+ID: testuser
+PW: password
+
+
 ## Web製作課題 企画書
 ### ■	対象となる想定ペルソナ
 - ワークアウトを行う人
