@@ -1,8 +1,9 @@
 ## URL
-https://esxi.himazin331.com
-(未完成により、バグや動作が安定しないことがあります)
-テスト用ユーザ
-ID: testuser
+https://esxi.himazin331.com<br>
+(未完成により、バグや動作が安定しないことがあります)<br>
+
+テスト用ユーザ<br>
+ID: testuser1
 PW: password
 
 
